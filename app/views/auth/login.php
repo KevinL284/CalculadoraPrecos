@@ -1,6 +1,13 @@
 <?php
 session_start();
-require_once __DIR__ . '/../../../config/config.php'; // Inclui a conexão correta
+
+// Inclui o arquivo de configuração
+require_once __DIR__ . '/../../../config/config.php';
+require_once __DIR__ . '/../../../app/Database.php';
+
+
+// Obtém a instância do PDO
+$pdo = Database::getInstance();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
@@ -24,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Verifica a senha
             if (password_verify($password, $hashed_password)) {
                 $_SESSION['user_id'] = $row['id'];
-                header("Location: /app/views/calculator/index.php");
+                header("Location: ../calculator/index.php");
                 exit();
             } else {
                 $error = "Usuário ou senha inválidos.";
@@ -43,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/projetosPessoais/calculadoraPrecos/public/assets/css/register.css?v=1">
     <title>Login</title>
 </head>
 <body>

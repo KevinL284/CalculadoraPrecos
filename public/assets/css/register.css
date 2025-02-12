@@ -1,0 +1,157 @@
+/* Estilos básicos para demonstração, ajuste conforme seu CSS */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f7f7;
+    color: #333;
+  }
+  
+  /* Header */
+  header {
+    background: #007BFF;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 2.5em;
+  }
+  
+  /* Container centralizado */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 40px 0;
+    background: #e9ecef;
+    text-align: center;
+  }
+  
+  .hero h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .hero p {
+    font-size: 1.1em;
+    line-height: 1.6;
+  }
+  
+  /* Ações gerais */
+  .actions {
+    text-align: center;
+    padding: 30px 0;
+  }
+  
+  .btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 25px;
+    background: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+  }
+  
+  .btn:hover {
+    background: #0056b3;
+  }
+  
+  /* Footer */
+  footer {
+    background: #343a40;
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 0.9em;
+  }
+  
+  /* Formulário de registro */
+  form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  /* Títulos do formulário */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Labels */
+  label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+  }
+  
+  /* Inputs */
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  /* Botão de submit */
+  input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilo para o link de login */
+  p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  p a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  p a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Exibição de erros */
+  div {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: red;
+  }
+  
