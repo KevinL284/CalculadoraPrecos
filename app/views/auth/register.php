@@ -1,50 +1,38 @@
 <?php
-// Inicia a sessão
 session_start();
 
-// Inclui o arquivo de configuração
+// Inclui os arquivos de configuração e o modelo de usuário
 require_once __DIR__ . '/../../../config/config.php';
-require_once __DIR__ . '/../../../app/Database.php';
+require_once __DIR__ . '/../../../config/Database.php';
+require_once __DIR__ . '/../../models/User.php';
 
+// Se o usuário já estiver logado, redireciona para a página principal
+if (isset($_SESSION['user_id'])) {
+    header("Location: /projetosPessoais/calculadoraPrecos/public/index.php");
+    exit;
+}
 
-// Obtém a instância do PDO
-$pdo = Database::getInstance();
+$error = null;
+$success = null;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Captura os dados do formulário
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+// Processa o formulário de registro
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username']);
+    $email    = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
-    // Valida os dados (aqui você pode adicionar mais validações, como verificar se o e-mail é válido)
     if (empty($username) || empty($email) || empty($password)) {
-        $error = "Todos os campos são obrigatórios!";
+        $error = "Por favor, preencha todos os campos.";
     } else {
-        // Verifica se o nome de usuário ou o e-mail já existem
-        $stmt = $pdo->prepare("SELECT id FROM users WHERE username = :username OR email = :email");
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            $error = "Nome de usuário ou e-mail já existe!";
+        $user = new User();
+        $result = $user->create($username, $email, $password);
+        
+        // Se o usuário for criado com sucesso, redireciona para a página de login
+        if ($result === "Usuário criado com sucesso!") {
+            header("Location: /projetosPessoais/calculadoraPrecos/app/views/auth/login.php?registered=1");
+            exit;
         } else {
-            // Criptografa a senha
-            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-            // Insere o novo usuário no banco de dados
-            $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $hashed_password);
-            
-            if ($stmt->execute()) {
-                // Redireciona para a página de login após o cadastro
-                header("Location: login.php");
-                exit;
-            } else {
-                $error = "Erro ao registrar o usuário.";
-            }
+            $error = $result;
         }
     }
 }
@@ -55,33 +43,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link para o CSS com cache busting -->
     <link rel="stylesheet" href="/projetosPessoais/calculadoraPrecos/public/assets/css/register.css?v=1">
-    <title>Criar Conta - Calculadora de Preços</title>
+    <title>Registro</title>
 </head>
 <body>
+    <div class="container">
+        <h2>Registro</h2>
 
-<h2>Criar Conta</h2>
+        <!-- Exibe mensagens de erro ou sucesso -->
+        <?php if (!empty($error)): ?>
+            <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+        <?php endif; ?>
+        <?php if (!empty($success)): ?>
+            <p style="color: green;"><?php echo htmlspecialchars($success); ?></p>
+        <?php endif; ?>
 
-<?php if (isset($error)): ?>
-    <div style="color: red;">
-        <?= $error; ?>
+        <!-- Formulário de registro -->
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required placeholder="Digite seu usuário" value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Digite seu email" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required placeholder="Digite sua senha">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Registrar" class="btn">
+            </div>
+        </form>
+
+        <p>Já tem uma conta? <a href="<?php echo '/projetosPessoais/calculadoraPrecos/app/views/auth/login.php'; ?>">Faça login aqui</a></p>
     </div>
-<?php endif; ?>
 
-<form action="" method="POST">
-    <label for="username">Nome de usuário:</label>
-    <input type="text" id="username" name="username" required><br><br>
-    
-    <label for="email">E-mail:</label>
-    <input type="email" id="email" name="email" required><br><br>
-    
-    <label for="password">Senha:</label>
-    <input type="password" id="password" name="password" required><br><br>
-    
-    <input type="submit" value="Criar Conta">
-</form>
-
-<p>Já tem uma conta? <a href="login.php">Faça login</a></p>
-
+    <!-- Exemplo de inclusão de um arquivo JS com cache busting -->
+    <script src="/projetosPessoais/calculadoraPrecos/public/assets/js/register.js?v=1"></script>
 </body>
 </html>

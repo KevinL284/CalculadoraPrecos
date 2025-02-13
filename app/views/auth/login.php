@@ -1,46 +1,42 @@
 <?php
+// Inicia a sessão
 session_start();
 
-// Inclui o arquivo de configuração
+// Inclui os arquivos de configuração e o modelo de usuário
 require_once __DIR__ . '/../../../config/config.php';
-require_once __DIR__ . '/../../../app/Database.php';
+require_once __DIR__ . '/../../../config/Database.php';
+require_once __DIR__ . '/../../models/User.php';
 
+// Se o usuário já estiver logado, redireciona para a página principal
+if (isset($_SESSION['user_id'])) {
+    header("Location: /projetosPessoais/calculadoraPrecos/public/index.php");
+    exit;
+}
 
-// Obtém a instância do PDO
-$pdo = Database::getInstance();
+// Inicializa a variável de erro
+$error = null;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+// Processa o formulário quando ele é enviado
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-    try {
-        // Verifica se a conexão com o banco está ativa
-        if (!isset($pdo)) {
-            throw new Exception("Erro na conexão com o banco de dados.");
-        }
-
-        // Consulta ao banco
-        $stmt = $pdo->prepare("SELECT id, password FROM users WHERE username = :username");
-        $stmt->bindParam(':username', $username);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $hashed_password = $row['password'];
-
-            // Verifica a senha
-            if (password_verify($password, $hashed_password)) {
-                $_SESSION['user_id'] = $row['id'];
-                header("Location: ../calculator/index.php");
-                exit();
-            } else {
-                $error = "Usuário ou senha inválidos.";
-            }
+    if (empty($username) || empty($password)) {
+        $error = "Por favor, preencha todos os campos.";
+    } else {
+        // Instancia o modelo User e chama o método de validação do login
+        $userModel = new User();
+        $result = $userModel->validateLogin($username, $password);
+        
+        // Se o retorno for um array, o login foi bem-sucedido
+        if (is_array($result)) {
+            $_SESSION['user_id'] = $result['id'];
+            header("Location: /projetosPessoais/calculadoraPrecos/public/index.php");
+            exit;
         } else {
-            $error = "Usuário ou senha inválidos.";
+            // Caso contrário, $result contém a mensagem de erro
+            $error = $result;
         }
-    } catch (Exception $e) {
-        $error = "Erro ao processar login: " . $e->getMessage();
     }
 }
 ?>
@@ -50,24 +46,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Caminho absoluto para o CSS com parâmetro para evitar cache -->
     <link rel="stylesheet" href="/projetosPessoais/calculadoraPrecos/public/assets/css/register.css?v=1">
     <title>Login</title>
 </head>
 <body>
-    <h2>Login</h2>
-    
-    <?php if (isset($error)): ?>
-        <p style="color: red;"><?php echo $error; ?></p>
-    <?php endif; ?>
-    
-    <form action="" method="post">
-        <label for="username">Usuário:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        
-        <input type="submit" value="Entrar">
-    </form>
+    <div class="container">
+        <h2>Login</h2>
+
+        <!-- Exibe mensagem de erro, se houver -->
+        <?php if (!empty($error)): ?>
+            <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+        <?php endif; ?>
+
+        <!-- Formulário de login -->
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required placeholder="Digite seu usuário" value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required placeholder="Digite sua senha">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Entrar" class="btn">
+            </div>
+        </form>
+
+        <p>Não tem uma conta? <a href="/projetosPessoais/calculadoraPrecos/app/views/auth/register.php">Crie uma agora</a></p>
+    </div>
+
+    <!-- Exemplo de inclusão de um arquivo JS com parâmetro para evitar cache -->
+    <script src="/projetosPessoais/calculadoraPrecos/public/assets/js/login.js?v=1"></script>
 </body>
 </html>
