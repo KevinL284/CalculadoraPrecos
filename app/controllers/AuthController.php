@@ -52,7 +52,7 @@ class AuthController {
             if (password_verify($password, $user['password'])) {
                 // Login bem-sucedido, por exemplo, pode criar uma sessão
                 session_start();
-                $_SESSION['user_id'] = $user['id']; // Supondo que 'id' seja o identificador do usuário
+                $_SESSION['user_id'] = $user['id']; 
                 return "Login bem-sucedido!";
             } else {
                 return "Senha incorreta!";

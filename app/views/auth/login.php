@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Caminho absoluto para o CSS com parâmetro para evitar cache -->
     <link rel="stylesheet" href="/projetosPessoais/calculadoraPrecos/public/assets/css/register.css?v=1">
     <title>Login</title>
 </head>
@@ -80,6 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Exemplo de inclusão de um arquivo JS com parâmetro para evitar cache -->
-    <script src="/projetosPessoais/calculadoraPrecos/public/assets/js/login.js?v=1"></script>
+    <script src="/projetosPessoais/calculadoraPrecos/public/assets/js/login.js?v=1"></script> <!-- aqui só vou incluir algumas pequenas validações -->
 </body>
 </html>

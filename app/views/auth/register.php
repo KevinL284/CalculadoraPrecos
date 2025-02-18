@@ -85,6 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Exemplo de inclusão de um arquivo JS com cache busting -->
-    <script src="/projetosPessoais/calculadoraPrecos/public/assets/js/register.js?v=1"></script>
+    <script src="/projetosPessoais/calculadoraPrecos/public/assets/js/register.js?v=1"></script> <!-- mesma ideia do login.js-->
 </body>
 </html>
