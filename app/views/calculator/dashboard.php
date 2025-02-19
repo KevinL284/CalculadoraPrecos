@@ -5,7 +5,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-require_once __DIR__ . '/../../app/models/Calculation.php';
+require_once __DIR__ . '/../../models/Calculation.php';
 $calcModel = new Calculation();
 $calculations = $calcModel->listarCalculos($_SESSION['user_id']);
 ?>
@@ -16,7 +16,7 @@ $calculations = $calcModel->listarCalculos($_SESSION['user_id']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico de Cálculos</title>
-    <link rel="stylesheet" href="/public/assets/css/style.css">
+    <link rel="stylesheet" href="/projetosPessoais/calculadoraPrecos/public/assets/css/style.css?v=1">
 </head>
 <body>
 
@@ -40,7 +40,9 @@ $calculations = $calcModel->listarCalculos($_SESSION['user_id']);
     <?php endforeach; ?>
 </table>
 
-<a href="/public/index.php">Voltar</a>
+<a href="/projetosPessoais/calculadoraPrecos/app/views/calculator/index.php">Nova Simulação</a>
+<a href="/projetosPessoais/calculadoraPrecos/public/index.php">Voltar</a>
+
 
 </body>
 </html>

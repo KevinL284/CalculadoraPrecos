@@ -76,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <p>Não tem uma conta? <a href="/projetosPessoais/calculadoraPrecos/app/views/auth/register.php">Crie uma agora</a></p>
+        <p><a href="/projetosPessoais/calculadoraPrecos/public/index.php">Inicio</a></p>
     </div>
 
     <!-- Exemplo de inclusão de um arquivo JS com parâmetro para evitar cache -->
