@@ -16,7 +16,7 @@ $calculations = $calcModel->listarCalculos($_SESSION['user_id']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico de Cálculos</title>
-    <link rel="stylesheet" href="/projetosPessoais/calculadoraPrecos/public/assets/css/style.css?v=1">
+    <link rel="stylesheet" href="/projetosPessoais/calculadoraPrecos/public/assets/css/dashboard.css?v=1">
 </head>
 <body>
 
@@ -40,9 +40,10 @@ $calculations = $calcModel->listarCalculos($_SESSION['user_id']);
     <?php endforeach; ?>
 </table>
 
-<a href="/projetosPessoais/calculadoraPrecos/app/views/calculator/index.php">Nova Simulação</a>
-<a href="/projetosPessoais/calculadoraPrecos/public/index.php">Voltar</a>
-
+<div class="button-container">
+    <a href="/projetosPessoais/calculadoraPrecos/app/views/calculator/index.php">Nova Simulação</a>
+    <a href="/projetosPessoais/calculadoraPrecos/public/index.php">Voltar</a>
+</div>
 
 </body>
 </html>
