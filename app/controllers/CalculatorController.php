@@ -26,9 +26,12 @@ class CalculatorController {
         }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Pegando os valores do formulário
-            $cost = floatval($_POST['cost']);
-            $sale_price = floatval($_POST['sale_price']);
+            // Pegando os valores do formulário e corrigindo o formato numérico
+            $cost = str_replace(',', '.', $_POST['cost']);
+            $sale_price = str_replace(',', '.', $_POST['sale_price']);
+
+            $cost = floatval($cost);
+            $sale_price = floatval($sale_price);
             
             // Calculando a margem e o lucro bruto
             $margin = ($cost > 0) ? (($sale_price - $cost) / $cost) * 100 : 0;
@@ -57,7 +60,6 @@ class CalculatorController {
     }
 }
 
-// Definindo qual ação chamar com base no parâmetro "action"
 $action = $_GET['action'] ?? null;
 $controller = new CalculatorController();
 

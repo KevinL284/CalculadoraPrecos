@@ -58,8 +58,7 @@ if (isset($_SESSION['resultado_calculo'])) {
     </div>
     
     <footer>
-        <p>&copy; 2024 Calculadora de Preços. Todos os direitos reservados.</p>
+        <p>&copy; 2025 Calculadora de Preços. Todos os direitos reservados.</p>
     </footer>
-    <script src="/projetosPessoais/calculadoraPrecos/public/assets/js/script.js?v=1"></script>
 </body>
 </html>

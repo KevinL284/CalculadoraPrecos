@@ -1,18 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Máscara para valores monetários (R$ 0.00)
     function formatCurrency(input) {
-        let value = input.value.replace(/\D/g, ""); // Remove tudo que não for número
-        value = (parseFloat(value) / 100).toFixed(2); // Converte para decimal
-        input.value = value.replace(".", ","); // Troca ponto por vírgula para padrão brasileiro
+        let value = input.value.replace(/\D/g, ""); 
+        value = (parseFloat(value) / 100).toFixed(2); 
+        input.value = value.replace(".", ","); 
     }
 
-    // Aplicando máscara ao campo de custo
+    function normalizeCurrency(input) {
+        return input.value.replace(",", "."); 
+    }
+
+    // Aplicar máscara aos campos
     document.getElementById("cost").addEventListener("input", function () {
         formatCurrency(this);
     });
 
-    // Aplicando máscara ao campo de preço de venda
     document.getElementById("sale_price").addEventListener("input", function () {
         formatCurrency(this);
+    });
+
+    // Ajustar valores antes do envio do formulário
+    document.getElementById("calcForm").addEventListener("submit", function () {
+        document.getElementById("cost").value = normalizeCurrency(document.getElementById("cost"));
+        document.getElementById("sale_price").value = normalizeCurrency(document.getElementById("sale_price"));
     });
 });
