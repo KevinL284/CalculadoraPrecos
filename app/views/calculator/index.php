@@ -20,7 +20,7 @@ if (isset($_SESSION['resultado_calculo'])) {
 <head>
     <meta charset="UTF-8">
     <title>Calculadora de Preços</title>
-    <link rel="stylesheet" href="/projetosPessoais/calculadoraPrecos/public/assets/css/calculator.css?v=1">
+    <link rel="stylesheet" href="calculadoraPrecos/public/assets/css/calculator.css?v=1">
 </head>
 <body>
     <header>

@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../models/User.php';
 
 // Se o usuário já estiver logado, redireciona para a página principal
 if (isset($_SESSION['user_id'])) {
-    header("Location: /projetosPessoais/calculadoraPrecos/public/index.php");
+    header("Location: ../../../public/index.php");
     exit;
 }
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Se o retorno for um array, o login foi bem-sucedido
         if (is_array($result)) {
             $_SESSION['user_id'] = $result['id'];
-            header("Location: /projetosPessoais/calculadoraPrecos/public/index.php");
+            header("Location: ../../public/index.php");
             exit;
         } else {
             // Caso contrário, $result contém a mensagem de erro
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/projetosPessoais/calculadoraPrecos/public/assets/css/register.css?v=1">
+    <link rel="stylesheet" href="../../../public/assets/css/register.css?v=1">
     <title>Login</title>
 </head>
 <body>
@@ -75,11 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </form>
 
-        <p>Não tem uma conta? <a href="/projetosPessoais/calculadoraPrecos/app/views/auth/register.php">Crie uma agora</a></p>
-        <p><a href="/projetosPessoais/calculadoraPrecos/public/index.php">Inicio</a></p>
+        <p>Não tem uma conta? <a href="calculadoraPrecos/app/views/auth/register.php">Crie uma agora</a></p>
+        <p><a href="../../../public/index.php">Inicio</a></p>
     </div>
 
     <!-- Exemplo de inclusão de um arquivo JS com parâmetro para evitar cache -->
-    <script src="/projetosPessoais/calculadoraPrecos/public/assets/js/login.js?v=1"></script> <!-- aqui só vou incluir algumas pequenas validações -->
+    <script src="calculadoraPrecos/public/assets/js/login.js?v=1"></script> <!-- aqui só vou incluir algumas pequenas validações -->
 </body>
 </html>
