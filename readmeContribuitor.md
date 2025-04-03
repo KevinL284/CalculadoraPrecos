@@ -15,7 +15,7 @@ Garantir que todos os contribuidores sigam um fluxo de trabalho organizado e con
 
 1. Clone o repositório para o seu computador:
 ```bash
- git clone <URL_DO_REPOSITORIO>
+ git clone <https://github.com/KevinL284/CalculadoraPrecos.git>
 ```
 
 2. Entre na pasta do projeto:
@@ -23,24 +23,13 @@ Garantir que todos os contribuidores sigam um fluxo de trabalho organizado e con
  cd <NOME_DA_PASTA>
 ```
 
-3. Instale as dependências necessárias (se houver):
-```bash
- # Exemplo para projetos Node.js
- npm install
-
- # Exemplo para projetos Python
- pip install -r requirements.txt
-```
-
-4. Crie um arquivo de configuração `.env` (se necessário) baseado no `.env.example` disponível no projeto.
-
 ---
 
 ## Trabalhando no Projeto
 
 ### 1. Acessar o Backlog
 
-- Acompanhe as tarefas atribuídas no backlog do projeto (Jira, Trello, GitHub Projects, etc.).
+- Acompanhe as tarefas atribuídas no backlog do projeto (GitHub Projects, etc.).
 - Escolha uma tarefa para trabalhar e mude seu status para "Em Progresso".
 - Certifique-se de entender todos os requisitos da tarefa antes de iniciar.
 
