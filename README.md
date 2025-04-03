@@ -36,11 +36,17 @@ O dashboard exibe os cálculos de margem de lucro e outras estatísticas importa
 
 ## Fase Atual
 Ainda estou testando algumas funcionalidades e corrigindo pequenos bugs no sistema, pretendo refatorar o css e colocar algumas mascaras para o calculo de preços pelo js.
+Também estou com uma equipe implementando novos calculos para tornar o projeto mais robusto.
+
 ## Próximos Passos
-- **Investir em um framework**: Planejamos migrar para um framework PHP para melhorar a organização e escalabilidade do projeto.
-- **Gráficos Interativos**: Implementação de gráficos interativos utilizando APIs para novos tipos de cálculo.
+- **Investir em um framework**: Planejamos migrar para um framework PHP para melhorar a organização e escalabilidade do projeto. - (A prioridade desse é mínima no momento)
+- **Gráficos Interativos**: Implementação de gráficos interativos utilizando APIs para novos tipos de cálculo.  
 - **Novas Tabelas no Banco de Dados**: Adicionar novas tabelas para suportar funcionalidades adicionais.
 - **Cálculos Adicionais**: Além do cálculo de margem de lucro, planeja-se adicionar novos tipos de cálculos ao dashboard.
+- **Taxa de Juros**: tela Adicional para calculo de taxa de juros com intervalo de tempos.
+- **Calculo de inflação**: Usaremos API do Banco Central para trazer os dados corretos.  
 
 ## Contribuição
-Se você deseja contribuir para este projeto, fique à vontade para abrir uma issue ou enviar um pull request.
+Se você deseja contribuir para este projeto, fique à vontade para abrir uma issue ou enviar um pull request.  
+Para mais detalhes, acesse o [readmeContribuitor.md](./readmeContribuitor.md).
+
